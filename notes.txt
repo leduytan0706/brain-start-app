@@ -1,0 +1,46 @@
+-- [file] sanity-typegen.json --
+- Tim tat ca nhung Sanity Queries (GROG queries) de tao Kieu (Type) 
+- Su dung extract.json
+- Tao file types.ts
+
+-- [command] npx sanity@latest typegen generate --
+- Tao cac Kieu (Type) tu GROG queries
+
+-- PPR (Partial Prerendering) --
+- Cho phep ket hop static vaf dynamic components voi nhau trong cung mot route
+
+
+-- {after} from 'next/server' --
+- Giúp tạo lịch trình một công việc được thực hiện sau khi một response (hoặc nội dung prerender) được hoàn thành
+
+-- ISR (Incremental Static Rendering) --
+- Nội dung được cached một lần và sau đó được revalidate sau mỗi 60s để refresh cache
+- Mỗi thay đổi về nội dung trong file, DB, .. không hiển thị cho đến khi page được revalidate
+
+-- SSR (Server Side Rendering) --
+- Nội dung mới nhất luôn được lấy từ nguồn ngay khi được cập nhật ở mỗi request
+
+
+-- useActionState - New React 19 feature --
+- Là một React hook cho phép cập nhật state dựa trên kết quả form action (khi được submit)
+- const [state, formAction, isPending] = useActionState(fn, initialState, permalink?);
+- use ActionState nhận vào 3 tham số: 
++ action: hàm được invoked khi form được submit 
++ initialState: trạng thái ban đầu của form
++ permalink (optional): string chứa URL mà form này chỉnh sửa
+- useActionState trả lại một mảng chứa 3 giá trị:
++ state: trạng thái của form (trạng thái của các input) khi được submit
++ formAction: hàm được sử dụng để truyền vào prop (attribute) action cho form để xử lý khi form được submit
++ isPending: giúp cho biết form đang trong trạng thái xử lý (thực hiện hàm) hay không.
+
+-- Server Action --
+- Là một loại hàm thực hiện xử lý logic thuộc bên server, thường được gọi bởi tương tác của người dùng bên client, ví dụ như form submission, authentication, data updating
+- Lợi ích:
++ Giảm thiểu code: Không cần phải viết các API endpoint cho các tác vụ đơn giản
++ Tăng hiệu suất: Giảm việc phải load bên client
++ Tăng bảo mật: Xử lý dữ liệu riêng tư tốt hơn
+- Để định nghĩa một file chứa server actions, chỉ cần khai báo dòng đầu tiên là 'use server'
+
+-- Hai cách tiếp cận đối với data fetching: parallel (song song) và sequential (tuần tự) --
+- Sequential: Các requests được render lần lượt từ của cha đến của con => load dữ liệu lâu hơn
+- Parallel: các requests trong một route được khởi tạo và load dữ liệu cùng một lúc => giảm thời gian
