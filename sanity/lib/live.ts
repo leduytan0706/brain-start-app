@@ -9,5 +9,7 @@ export const { sanityFetch, SanityLive } = defineLive({
     // Live content is currently only available on the experimental API
     // https://www.sanity.io/docs/api-versioning
     apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION  
-  }) 
+  }),
+  browserToken: process.env.SANITY_WRITE_TOKEN,
+  serverToken: process.env.SANITY_WRITE_TOKEN,
 });
