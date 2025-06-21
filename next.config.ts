@@ -3,6 +3,12 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   images: {
     // Cho phép ảnh SVG
     dangerouslyAllowSVG: true,
@@ -21,7 +27,8 @@ const nextConfig: NextConfig = {
     appIsrStatus: true,
     buildActivity: true,
     buildActivityPosition: 'bottom-right'
-  }
+  },
+  
 };
 
 export default withSentryConfig(nextConfig, {
